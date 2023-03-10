@@ -2,23 +2,21 @@
 
 FROM python:3.9.16-bullseye as base
 
+WORKDIR /usr/src/app
+
 COPY ./scripts/create.env.sh ./create.env.sh
 RUN chmod +x ./create.env.sh
-CMD ["./create.env.sh"]
+
+RUN ./create.env.sh
 
 SHELL [ "/bin/bash", "-c"]
 
-WORKDIR /app
-
-ADD ./app /app
-
-ADD ./lib /lib/
-
+ADD ./app /usr/src/app
 
 RUN python -m pip install --upgrade pip
 
-RUN python -m venv "/venv" --upgrade-deps; 
-RUN source "/venv/bin/activate";
+# RUN python -m venv "/venv" --upgrade-deps; 
+# RUN source "/venv/bin/activate";
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # build-essential \
@@ -42,7 +40,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # RUN cp /lib/pyromod/dist/*.*tar.gz ./lib
 # RUN python -m build /lib/pystark
 # RUN cp /lib/pystark/dist/*.tar.gz ./lib
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN pip install --no-cache-dir  https://github.com/DavidDoesPythonBadly/pyrogram/releases/download/v2.0.110/Pyrograms-2.0.110.tar.gz
+RUN pip install --no-cache-dir  https://github.com/DavidDoesPythonBadly/pyromod/releases/download/v2.0.6/pyromod-2.0.6.tar.gz
+RUN pip install --no-cache-dir  https://github.com/DavidDoesPythonBadly/PyStark/releases/download/1.2.17/PyStark-1.2.17-py3-none-any.whl
+
+
+CMD [ "python", "/usr/src/app/bot.py" ]
 
 # RUN grep -v -x -f requirements.txt requirements-new.txt > requirements-final.txt
 # RUN echo "Installing the following dependencies:"

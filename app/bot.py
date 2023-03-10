@@ -1,4 +1,4 @@
-from pystark import Stark
+from pystark.client import Stark
 from pyromod import listen
 from database.users_sql import Users
 

@@ -16,6 +16,3 @@ pytest
 pytest-asyncio
 pytest-cov
 twine
-./app/lib/Pyrogram-2.0.106-py3-none-any.whl
-./app/lib/pyromod-2.0.4-py3-none-any.whl
-./app/lib/PyStark-1.2.9-py3-none-any.whl

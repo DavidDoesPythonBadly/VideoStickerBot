@@ -4,12 +4,12 @@ services:
             - APP_ROOT=/app
             - BUILD_DIR=/app
             - SCRIPTS_DIR=/scripts
-        container_name: videostickerbot-jwcmods
-        working_dir: /app
-        image: videostickerbot:jwcmods
+        container_name: videostickerbot-dgmjrmod
+        working_dir: /usr/src/app
+        image: videostickerbot:dgmjrmod
         volumes:
-            - ./app:/app
-            - ./scripts/:/app/scripts
+            - ./app:/usr/src/app
+            - ./scripts/:/usr/src/scripts
             # - scripts:/scripts
             # - app:/app
             # - venv:/.venv
@@ -19,9 +19,12 @@ services:
             - -c
             - |
                 # python -m venv "/.venv/venv"; 
-                source "/venv/bin/activate";
+                # source "/venv/bin/activate";
                 pip install -r requirements.txt;
-                python /app/bot.py
+                pip install --no-cache-dir  https://github.com/DavidDoesPythonBadly/pyrogram/releases/download/v2.0.110/Pyrograms-2.0.110.tar.gz
+                pip install --no-cache-dir  https://github.com/DavidDoesPythonBadly/pyromod/releases/download/v2.0.6/pyromod-2.0.6.tar.gz
+                pip install --no-cache-dir  https://github.com/DavidDoesPythonBadly/PyStark/releases/download/1.2.17/PyStark-1.2.17-py3-none-any.whl
+                python /usr/src/app/bot.py
             # python -m venv venv
             # source /venv/bin/activate
             # echo "Getting all the dependencies of the requirements..."
