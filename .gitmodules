@@ -1,0 +1,9 @@
+[submodule "pyromod"]
+	path = pyromod
+	url = https://github.com/dgmjr/pyromod
+[submodule "pyrogram"]
+	path = pyrogram
+	url = https://github.com/dgmjr/pyrogram.git
+[submodule "PyStark"]
+	path = PyStark
+	url = https://github.com/dgmjr-io/PyStark.git

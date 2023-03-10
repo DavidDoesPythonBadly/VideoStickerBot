@@ -1,0 +1,58 @@
+services:
+    bot:
+        environment:
+            - APP_ROOT=/app
+            - BUILD_DIR=/app
+            - SCRIPTS_DIR=/scripts
+        container_name: videostickerbot-jwcmods
+        working_dir: /app
+        image: videostickerbot:jwcmods
+        volumes:
+            - ./app:/app
+            - ./scripts/:/app/scripts
+            # - scripts:/scripts
+            # - app:/app
+            # - venv:/.venv
+        command:
+            # az webapp config appsettings set --resource-group VideoStickerBot --name <app-name> --settings DB_HOST="myownserver.mysql.database.azure.com"
+            - /bin/bash
+            - -c
+            - |
+                # python -m venv "/.venv/venv"; 
+                source "/venv/bin/activate";
+                pip install -r requirements.txt;
+                python /app/bot.py
+            # python -m venv venv
+            # source /venv/bin/activate
+            # echo "Getting all the dependencies of the requirements..."
+            # pip freeze -r requirements.txt > requirements-new.txt
+            # echo "Calculating the difference..."
+            # grep -v -x -f requirements-new.txt requirements.txt 
+            # echo "Adding back the ones we want..."
+            # cat "requirements.txt >> requirements-new.txt
+            # cat "requirements-final.txt" | grep -vE "$(cat no-options-requirements.txt)" > "requirements-final.txt"
+            # cat "requirements-always-require.txt" >> "requirements-final.txt"
+            # mv requirements-final.txt requirements.txt
+            # echo "Installing these requirements:"
+            # cat requirements.txt
+        ports:
+            - 80:8081
+
+
+# volumes:
+#     build:
+#         external: true
+#         name: "StickerBotBuild"
+#         driver: local
+#     scripts:
+#         external: true
+#         name: "StickerBotScripts"
+#         driver: local
+    # venv:
+    #     external: true
+    #     name: "StickerBotVenv"
+    #     driver: local
+#     app:
+#         external: true
+#         name: "StickerBotApp"
+#         driver: local

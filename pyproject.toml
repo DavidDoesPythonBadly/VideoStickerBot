@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm", "wheel"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "videostickerbot"
+authors = [
+    {name = "Justin Chase", email = "justin@justinwritescode.com"},
+]
+version = "0.0.1"
+description = "A video sticker bot to turn MP4s and GIfs into Telegram stickers."
+requires-python = ">=3.9"
+keywords = ["video", "stickers", "telegram", "bot"]
+license = {text = "BSD-3-Clause"}
+classifiers = [
+    "Framework :: Django",
+    "Programming Language :: Python :: 3",
+]
+[tool.setuptools.package-dir]
+"videostickerbot" = "app"
+"videostickerbot.plugins" = "app/plugins"
+"videostickerbot.database" = "app/database"
+[python.scripts]
+my-client = "videostickerbot:main"
